@@ -6,10 +6,11 @@ const options = {
   baseUrl: 'http://bulk.openweathermap.org/sample/',
   archiveName: 'city.list.json.gz',
   unzippedName: 'city.list.json',
-  resultName: 'nl.cities.json',
+  resultName: '../src/components/weather/data/nl.cities.json',
   countryCode: 'NL', // for Netherlands
 };
 
+/** Automatic download and processing of country cities */
 async function start() {
   try {
     await download();
@@ -85,7 +86,7 @@ function filterCityList() {
       console.log('Filtering completed.');
       console.log(
         '\x1b[1mCheck the resulting JSON file: \x1b[32m%s\x1b[0m',
-        __dirname + '/' + options.resultName
+        fs.realpathSync(__dirname + '/' + options.resultName)
       );
       resolve();
     } catch (error) {
